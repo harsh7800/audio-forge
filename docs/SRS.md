@@ -1,53 +1,112 @@
-# System Requirements Specification (SRS)
+# AudioForge — Brief SRS
+
+---
 
 ## 1. Overview
-AudioForge is an AI-powered system that converts text-based content (PDF, raw text, URLs) into audio outputs such as audiobooks, summaries, and lectures using an agent-driven workflow.
 
-## 2. Objectives
-- Implement an agentic workflow using tool-based architecture
-- Follow strict Test-Driven Development (TDD)
-- Enable modular, scalable system design
-- Provide end-to-end working MVP
+AudioForge is a system that converts text-based content (PDFs, raw text, URLs) into audio formats such as audiobooks and summaries using an asynchronous, tool-based processing pipeline.
 
-## 3. Users
+---
+
+## 2. Objective
+
+- Convert text into high-quality audio
+- Demonstrate agentic workflow implementation
+- Follow Test-Driven Development (TDD)
+- Build a scalable, modular backend system
+
+---
+
+## 3. Target Users
+
 - Internal developers (primary)
-- Evaluators (secondary)
+- Evaluators / reviewers (secondary)
 
-## 4. Functional Requirements
+---
+
+## 4. Core Features (MVP)
 
 ### Input
 - Upload PDF
 - Paste text
-- Provide URL (future)
 
-### Processing Modes
-- Audiobook mode
-- Summary mode
-- Lecture mode (future)
+### Modes
+- Audiobook mode (full content)
+- Summary mode (condensed content)
 
 ### Output
-- Play audio
-- Download audio
-- Chapter segmentation (future)
+- Audio playback
+- Audio download
 
-### Agent Behavior
-- Decide processing steps
-- Select tools dynamically (future phases)
-- Log execution
+---
 
-## 5. Non-Functional Requirements
-- Asynchronous job processing
-- High test coverage (>80%)
+## 5. System Flow
+
+User Input → API → Job Queue → Worker → Processing Tools → TTS → Audio Output
+
+---
+
+## 6. Key Components
+
+- Backend API (Node.js)
+- Queue System (BullMQ + Redis)
+- Worker Layer (async processing)
+- Tool Layer (modular functions)
+- AI Services (TTS + summarization)
+- Frontend (Next.js UI)
+
+---
+
+## 7. Functional Requirements
+
+- Accept file/text input
+- Create processing job
+- Execute pipeline (extract → clean → process → TTS)
+- Return audio output
+- Track job status
+
+---
+
+## 8. Non-Functional Requirements
+
+- Asynchronous processing
+- High reliability and retry handling
 - Modular architecture
-- Fault-tolerant execution
-- Clear logging and observability
+- High test coverage (TDD)
+- Scalable worker system
 
-## 6. Constraints
-- AI-generated code must follow TDD
-- Tools must be stateless and testable
-- No large monolithic functions
+---
 
-## 7. Success Criteria
+## 9. MVP Scope
+
+### Included
+- File upload / text input
+- Audiobook + summary generation
+- Job processing with queue
+- Audio output
+
+### Excluded
+- Multi-agent system
+- Advanced voice control
+- Real-time streaming
+- User authentication
+
+---
+
+## 10. Future Scope
+
+- Agent-based decision system
+- Dynamic pipeline planning
+- Multi-agent architecture
+- Improved narration and voice control
+- Real-time updates
+
+---
+
+## 11. Success Criteria
+
 - End-to-end pipeline works
-- Tests pass with high coverage
-- Agent decision flow is visible
+- Audio is generated successfully
+- System handles async jobs reliably
+- Tests cover core logic
+- Clear logs and observability
