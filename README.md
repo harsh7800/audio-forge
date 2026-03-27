@@ -1,36 +1,72 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AudioForge Frontend Documentation
+
+> **Tech Stack**: Next.js 15 + React 19 + Tailwind CSS + TypeScript  
+> **Backend API**: AudioForge Backend (NestJS)  
+> **Authentication**: None (MVP)
+
+## Quick Links
+
+| Document | Description |
+|----------|-------------|
+| [Implementation Plan](./implementation-plan.md) | Phased development roadmap |
+| [API Integration](./api-integration.md) | Backend API endpoints and usage |
+| [Project Structure](./project-structure.md) | Directory structure and conventions |
+| [Component Architecture](./component-architecture.md) | UI components and patterns |
+| [State Management](./state-management.md) | Data flow and state handling |
+| [Testing Strategy](./testing-strategy.md) | Unit, integration, and E2E tests |
+| [Environment Setup](./environment-setup.md) | Local development configuration |
+
+## Overview
+
+AudioForge Frontend is a Next.js application that provides a user interface for:
+
+1. **Upload** - Upload PDF/eBook files for audiobook conversion
+2. **Process** - Monitor real-time processing progress
+3. **Listen** - Stream generated audiobook audio
+4. **Manage** - View and manage audiobook library
+
+## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                     Next.js Frontend                         │
+├─────────────────────────────────────────────────────────────┤
+│  Pages/                      │  Components/                  │
+│  ├── upload/                 │  ├── ui/ (shadcn)           │
+│  ├── library/                │  ├── features/               │
+│  └── audiobook/[id]/         │  └── layouts/                │
+├────────────────────────────┬────────────────────────────────┤
+│  State Management          │  API Layer                    │
+│  ├── React Query (server)  │  ├── /api/client.ts          │
+│  └── React Context (local) │  └── /api/endpoints.ts       │
+└────────────────────────────┴────────────────────────────────┘
+                              │
+                              ▼
+┌─────────────────────────────────────────────────────────────┐
+│                   AudioForge Backend API                     │
+│                   (NestJS on port 3000)                     │
+└─────────────────────────────────────────────────────────────┘
+```
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+# Copy this docs folder into your frontend project
+cp -r frontend-docs/. /path/to/your/frontend/docs/
+
+# Follow environment-setup.md for configuration
+pnpm install
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development Phases
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Phase | Description | Est. Time |
+|-------|-------------|-----------|
+| Phase 1 | Project Setup & Core UI | 1-2 days |
+| Phase 2 | File Upload Flow | 2-3 days |
+| Phase 3 | Library & Progress Tracking | 2-3 days |
+| Phase 4 | Audio Player & Streaming | 2-3 days |
+| Phase 5 | Polish & Testing | 2-3 days |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+See [implementation-plan.md](./implementation-plan.md) for detailed tasks.
